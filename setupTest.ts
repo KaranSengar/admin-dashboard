@@ -1,6 +1,5 @@
-import '@testing-library/jest-dom'
-import { addListener, removeListener } from 'process'
-import { beforeEach, vi } from 'vitest'
+import '@testing-library/jest-dom';
+import { beforeEach, vi } from 'vitest';
 
 beforeEach(()=>{
     const matchMediaMock=vi.fn().mockImplementation((query)=>({

@@ -6,10 +6,48 @@ import {
   LockOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import type { Credentails } from "../../types";
 import { Form } from "antd";
 import Logo from "../../component/icons/Logo";
+import { useMutation } from "@tanstack/react-query";
+const loginUser = async(credentails:Credentails) =>{
+  //server call logic
+  const {data} =await (credentails)
+  return data
+}
+
+
 
 function LoginPages() {
+
+
+
+
+
+
+
+const {mutate}=useMutation({
+  mutationKey:['login'],
+  mutationFn:loginUser,
+  onSuccess:async()=>{
+    console.log('login successfull')
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <>
       <Layout
@@ -44,7 +82,11 @@ function LoginPages() {
               </Space>
             }
           >
-            <Form initialValues={{ remember: true }}>
+            <Form initialValues={{ remember: true }} 
+            onFinish={(values)=>{
+              mutate({email:values.username,password:values.password})
+              console.log(values)
+            }}>
               <Form.Item
                 name="username"
                 rules={[
